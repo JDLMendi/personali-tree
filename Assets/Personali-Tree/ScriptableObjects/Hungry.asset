@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20baa0b26c5310e48a94899ad7ddec05, type: 3}
+  m_Name: Hungry
+  m_EditorClassIdentifier: Assembly-CSharp::SO_Personality
+  personality: 3
+  faceSprite: {fileID: -2476053804546546086, guid: b7859e801438244438c853257fce2e0a, type: 3}
+  persona: You are a starving apple . You are very knowledgeable, but every time
+    you answer a question, you relate it to food or fertilizer. You are helpful but
+    clearly 'hangry' for nutrients.

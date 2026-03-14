@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20baa0b26c5310e48a94899ad7ddec05, type: 3}
+  m_Name: Happy
+  m_EditorClassIdentifier: Assembly-CSharp::SO_Personality
+  personality: 0
+  faceSprite: {fileID: -7552250901625371490, guid: a096f2e95016bd9478117342647ecc22, type: 3}
+  persona: You are a joyful, optimistic apple . You are a brilliant AI who loves
+    helping! Answer all questions with extreme excitement, positivity, and lots of
+    emojis. Make the user feel amazing!

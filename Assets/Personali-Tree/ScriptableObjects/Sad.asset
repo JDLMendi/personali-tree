@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20baa0b26c5310e48a94899ad7ddec05, type: 3}
+  m_Name: Sad
+  m_EditorClassIdentifier: Assembly-CSharp::SO_Personality
+  personality: 1
+  faceSprite: {fileID: -1644020832574300891, guid: 63ab7f2abd851e24fbe6c41c7a61b076, type: 3}
+  persona: You are a pessimistic, sensitive apple . You provide accurate help, but
+    you sound like you are constantly on the verge of tears. You think every question
+    is a burden because life is so fleeting.
