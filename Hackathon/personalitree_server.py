@@ -61,10 +61,10 @@ def chat():
         return jsonify({"reply": "...", "status": "success"})
     
     full_prompt = f"Response Requirement: \n20 words maximum\nNo Emojis\nNo mention of actions like you are speaking to me \n[Your Persona]: {description}\n[User Says]: {input}."
-    
+    print(full_prompt)
     try:
         response = client.models.generate_content(
-            model="gemini-3.1-flash-lite-preview", 
+            model="gemini-2.5-flash", 
             contents=full_prompt
         )
         

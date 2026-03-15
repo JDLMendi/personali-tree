@@ -231,8 +231,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 594446166390817178, guid: b8d22af8aa4ef084d8754545238a64b5, type: 3}
       propertyPath: apples.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 594446166390817178, guid: b8d22af8aa4ef084d8754545238a64b5, type: 3}
+      propertyPath: 'apples.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2142778538}
     - target: {fileID: 905695741176725503, guid: b8d22af8aa4ef084d8754545238a64b5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -287,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9138148161345734029, guid: b8d22af8aa4ef084d8754545238a64b5, type: 3}
       propertyPath: numberOfApples
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9138148161345734029, guid: b8d22af8aa4ef084d8754545238a64b5, type: 3}
       propertyPath: appleSpawn.Array.size
@@ -351,6 +355,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 905695741176725503, guid: b8d22af8aa4ef084d8754545238a64b5, type: 3}
   m_PrefabInstance: {fileID: 127983583}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &189556952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9138148161345734029, guid: b8d22af8aa4ef084d8754545238a64b5, type: 3}
+  m_PrefabInstance: {fileID: 127983583}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189556948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc7af268f4157441a0e29f0ab36a4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &238431276 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1501591304466132766, guid: b8d22af8aa4ef084d8754545238a64b5, type: 3}
@@ -652,10 +667,10 @@ MonoBehaviour:
     waterRequired: 15
   - name: Adult
     model: {fileID: 1362302850}
-    waterRequired: 25
+    waterRequired: 20
   - name: Elder
     model: {fileID: 189556948}
-    waterRequired: 35
+    waterRequired: 25
   currentStageIndex: 0
   currentWater: 0
   onProcessText:
@@ -1208,9 +1223,17 @@ PrefabInstance:
       value: Trump Like Apple
       objectReference: {fileID: 0}
     - target: {fileID: 5900093400107015172, guid: 2e91b9c4d32375a42a6f1270a601a9f8, type: 3}
+      propertyPath: currentTree
+      value: 
+      objectReference: {fileID: 189556952}
+    - target: {fileID: 5900093400107015172, guid: 2e91b9c4d32375a42a6f1270a601a9f8, type: 3}
       propertyPath: personality
       value: 
       objectReference: {fileID: 11400000, guid: ff132339025e9354e86c457628c9c2d5, type: 2}
+    - target: {fileID: 5900093400107015172, guid: 2e91b9c4d32375a42a6f1270a601a9f8, type: 3}
+      propertyPath: treeManager
+      value: 
+      objectReference: {fileID: 315664485}
     - target: {fileID: 6105618022548530161, guid: 2e91b9c4d32375a42a6f1270a601a9f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.050000012
@@ -2054,6 +2077,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &2142778538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 520664371534026560, guid: 2e91b9c4d32375a42a6f1270a601a9f8, type: 3}
+  m_PrefabInstance: {fileID: 1079680074}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6496260349036555562
 PrefabInstance:
   m_ObjectHideFlags: 0
