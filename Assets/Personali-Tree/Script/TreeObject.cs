@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic; // Required for List
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public class TreeObject : MonoBehaviour
+public class TreeObject : MonoBehaviour, IPointerDownHandler
 {
     public Vector3[] appleSpawn;
     public int numberOfApples;
@@ -12,10 +15,18 @@ public class TreeObject : MonoBehaviour
     // Track which spots are currently taken
     private List<int> _availableIndices = new List<int>();
 
+    public UnityEvent shaken;
+    
     public void OnEnable()
     {
         appleManager = GetComponentInChildren<AppleManager>();
         treeManager = FindFirstObjectByType<TreeManager>();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("Tree has been shaken!");
+        shaken?.Invoke();
     }
 
     private void OnDrawGizmosSelected()
@@ -74,6 +85,6 @@ public class TreeObject : MonoBehaviour
         // 5. Remove it so it can't be picked again this round
         _availableIndices.RemoveAt(listIndex);
 
-        appleManager.CreateApple(personality, position);
+        appleManager.CreateApple(personality, position, this);
     }
 }

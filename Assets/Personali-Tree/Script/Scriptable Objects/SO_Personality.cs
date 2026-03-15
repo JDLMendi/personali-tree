@@ -10,4 +10,5 @@ public class SO_Personality : ScriptableObject
     public Personality personality;
     public Sprite faceSprite;
     public string persona;
+    public string greetings;
 }

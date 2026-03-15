@@ -25,7 +25,7 @@ public class AppleManager : MonoBehaviour
         }
     }
 
-    public void CreateApple(SO_Personality personality, Vector3 position)
+    public void CreateApple(SO_Personality personality, Vector3 position, TreeObject tree)
     {
         var apple= Instantiate(applePrefab, transform);
         apple.transform.parent = transform;
@@ -34,5 +34,6 @@ public class AppleManager : MonoBehaviour
         
         var appleObj =  apple.GetComponent<AppleObject>();
         appleObj.personality = personality;
+        appleObj.currentTree = tree;
     }
 }

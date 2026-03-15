@@ -4,6 +4,8 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using DG.Tweening;
 using Random = UnityEngine.Random;
 using UnityEngine.InputSystem;
 
@@ -15,6 +17,7 @@ public class TreeStage
     public int waterRequired;   // How much water to finish THIS stage
 }
 
+
 public class TreeManager : MonoBehaviour
 {
     public TreeObject currentTree;
@@ -23,6 +26,10 @@ public class TreeManager : MonoBehaviour
     [Header("Personalities")]
     public SO_Personality[] personalities;
     
+    [Header("Transition Settings")]
+    public float fadeDuration = 0.5f;
+    public float scalePunchAmount = 0.2f;
+
     [Header("Growth Configuration")]
     public TreeStage[] stages; 
     
@@ -31,14 +38,18 @@ public class TreeManager : MonoBehaviour
     public int currentWater = 0;
 
     [Header("Events")] public UnityEvent<string> onProcessText;
+    private Dictionary<GameObject, Vector3> originalScales = new Dictionary<GameObject, Vector3>();
+
     private void Start()
     {
-        UpdateVisuals();
+        // Initialize visuals without animation on start
+        RecordOriginalScales();
+        InitialSetup();
     }
     
     private void Update()
+
     {
-        // Use Keyboard.current to check for the Enter key
         if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame)
         {
             Debug.Log(userInput.text);
@@ -49,47 +60,83 @@ public class TreeManager : MonoBehaviour
             }
         }
     }
-
-    [Button(ButtonSizes.Small)]
-    public void WaterPlant()
+    
+    private void RecordOriginalScales()
     {
-        if (currentStageIndex >= stages.Length - 1)
+        foreach (var stage in stages)
         {
-            Debug.Log("The tree is at its final form!");
-            return;
+            if (stage.model != null)
+            {
+                // Save the scale you set in the Inspector
+                originalScales[stage.model] = stage.model.transform.localScale;
+            }
         }
+    }
 
-        currentWater++;
-        
-        int needed = stages[currentStageIndex].waterRequired;
-
-        if (currentWater >= needed)
+    private void InitialSetup()
+    {
+        for (int i = 0; i < stages.Length; i++)
         {
-            GrowToNextStage();
+            bool isCurrent = (i == currentStageIndex);
+            stages[i].model.SetActive(isCurrent);
+            
+            if (isCurrent)
+            {
+                currentTree = stages[i].model.GetComponent<TreeObject>();
+                if(currentTree != null) currentTree.StartTree();
+                
+                // Ensure it starts at its correct scale
+                stages[i].model.transform.localScale = originalScales[stages[i].model];
+            }
         }
     }
 
     private void GrowToNextStage()
     {
-        currentWater = 0;
+        GameObject oldModel = stages[currentStageIndex].model;
         currentStageIndex++;
-        UpdateVisuals();
+        GameObject newModel = stages[currentStageIndex].model;
+
+        PerformTransition(oldModel, newModel);
         
+        currentWater = 0;
         Debug.Log($"Grown! Now at stage: {stages[currentStageIndex].name}");
     }
 
-    private void UpdateVisuals()
+    private void PerformTransition(GameObject oldModel, GameObject newModel)
     {
-        for (int i = 0; i < stages.Length; i++)
-        {
-            var  stage = stages[i];
-            if (stage.model != null)
-            {
-                stage.model.SetActive(i == currentStageIndex);
-                currentTree = stage.model.GetComponent<TreeObject>();
-                currentTree.StartTree();
-            }
-        }
+        // 1. Scale old model down to zero
+        oldModel.transform.DOScale(Vector3.zero, fadeDuration)
+            .SetEase(Ease.InBack)
+            .OnComplete(() => oldModel.SetActive(false));
+
+        // 2. Prepare new model
+        newModel.SetActive(true);
+        newModel.transform.localScale = Vector3.zero; 
+
+        // 3. Scale up to its UNIQUE original scale (not just Vector3.one)
+        Vector3 targetScale = originalScales[newModel];
+
+        newModel.transform.DOScale(targetScale, fadeDuration)
+            .SetEase(Ease.OutBack)
+            .OnComplete(() => {
+                currentTree = newModel.GetComponent<TreeObject>();
+                if(currentTree != null) currentTree.StartTree();
+                
+                // Punch scale relative to its natural size
+                newModel.transform.DOPunchScale(targetScale * scalePunchAmount, 0.3f);
+            });
     }
 
+    [Button(ButtonSizes.Small)]
+    public void WaterPlant()
+    {
+        if (currentStageIndex >= stages.Length - 1) return;
+
+        currentWater++;
+        if (currentWater >= stages[currentStageIndex].waterRequired)
+        {
+            GrowToNextStage();
+        }
+    }
 }
